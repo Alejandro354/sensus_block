@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sensus_block - Acceso</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #0f172a; color: #f8fafc; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .card { background: #1e293b; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); width: 100%; max-width: 380px; border: 1px solid #334155; }
+        .logo { text-align: center; font-size: 1.8em; font-weight: bold; color: #6366f1; margin-bottom: 25px; letter-spacing: 1px; }
+        
+        .form-group { margin-bottom: 15px; }
+        input { width: 100%; padding: 12px; background: #0f172a; border: 1px solid #334155; border-radius: 8px; color: white; outline: none; transition: 0.3s; }
+        input:focus { border-color: #6366f1; }
+        
+        button { width: 100%; padding: 12px; background: #6366f1; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background: #4f46e5; }
+        
+        .toggle-btn { text-align: center; margin-top: 20px; font-size: 0.9em; color: #94a3b8; }
+        .toggle-btn span { color: #818cf8; cursor: pointer; font-weight: bold; text-decoration: underline; }
+        
+        .error { background: #ef444422; color: #f87171; border: 1px solid #ef4444; padding: 10px; border-radius: 8px; font-size: 0.85em; margin-bottom: 15px; text-align: center; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="logo">sensus_block</div>
+        
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+        <form id="login-form" method="POST">
+            <div class="form-group">
+                <input type="text" name="usuario" placeholder="Usuario" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Contraseña" required>
+            </div>
+            <button type="submit" name="action" value="login">Iniciar Sesión</button>
+            <div class="toggle-btn">
+                ¿No tienes cuenta? <span onclick="mostrarRegistro()">Regístrate aquí</span>
+            </div>
+        </form>
+
+        <form id="register-form" method="POST" class="hidden">
+            <div class="form-group">
+                <input type="text" name="nombre" placeholder="Tu Nombre Completo" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="usuario" placeholder="Crea un Usuario" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" placeholder="Crea una Contraseña" required>
+            </div>
+            <button type="submit" name="action" value="register" style="background: #10b981;">Crear Mi Cuenta</button>
+            <div class="toggle-btn">
+                ¿Ya tienes cuenta? <span onclick="mostrarLogin()">Inicia Sesión</span>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function mostrarRegistro() {
+            document.getElementById('login-form').classList.add('hidden');
+            document.getElementById('register-form').classList.remove('hidden');
+        }
+        function mostrarLogin() {
+            document.getElementById('register-form').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
